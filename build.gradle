@@ -9,14 +9,8 @@ gatling {
   logLevel = 'WARN' // logback root level
   logHttp = 'NONE' // set to 'ALL' for all HTTP traffic in TRACE, 'FAILURES' for failed HTTP traffic in DEBUG
   enterprise {
-    // See https://gatling.io/docs/gatling/reference/current/extensions/gradle_plugin/#working-with-gatling-enterprise-cloud for more information
-    // omit apiToken when using environment variable or Java System property instead
-    //apiToken "YOUR_API_TOKEN"
-    //packageId "YOUR_PACKAGE_ID"
-    //simulationId "YOUR_SIMULATION_ID"
-    //teamId "YOUR_TEAM_ID"
-    //simulationClass "computerdatabase.BasicSimulation"
-    //batchMode true
+    // Enterprise Cloud (https://cloud.gatling.io/) configuration reference: https://gatling.io/docs/gatling/reference/current/extensions/gradle_plugin/#working-with-gatling-enterprise-cloud
+    // Enterprise Self-Hosted configuration reference: https://gatling.io/docs/gatling/reference/current/extensions/gradle_plugin/#working-with-gatling-enterprise-self-hosted
   }
 }
 
