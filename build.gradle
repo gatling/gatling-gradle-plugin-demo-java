@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     // The following line allows to load io.gatling.gradle plugin and directly apply it
-    id 'io.gatling.gradle' version '3.7.6.3'
+    id 'io.gatling.gradle' version '3.8.0'
 }
 
 gatling {
@@ -14,7 +14,6 @@ gatling {
   }
 }
 
-// maven central is added by default, uncomment and add more custom repositories
-//repositories {
-//    mavenCentral()
-//}
+repositories {
+  mavenCentral()
+}
