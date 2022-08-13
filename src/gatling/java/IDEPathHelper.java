@@ -1,6 +1,7 @@
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import static java.util.Objects.requireNonNull;
 
 public class IDEPathHelper {
 
@@ -12,7 +13,7 @@ public class IDEPathHelper {
 
   static {
     try {
-      Path projectRootDir = Paths.get(IDEPathHelper.class.getClassLoader().getResource("gatling.conf").toURI()).getParent().getParent().getParent().getParent();
+      Path projectRootDir = Paths.get(requireNonNull(IDEPathHelper.class.getResource("gatling.conf"), "Couldn't locate gatling.conf").toURI()).getParent().getParent().getParent().getParent();
       Path gradleBuildDirectory = projectRootDir.resolve("build");
       Path gradleSrcDirectory = projectRootDir.resolve("src").resolve("gatling");
 
