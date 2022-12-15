@@ -21,7 +21,7 @@ public class SlimStampenSimulation extends Simulation {
     ChainBuilder jwks =
             exec(http("JWKS").get("/.well-known/jwks.json").check(status().is(200)));
 
-    ChainBuilder login = feed(userFeeder)
+    ChainBuilder loginAndPractice = feed(userFeeder)
             .exec(http("login")
                     .post("/api/user/login")
                     .body(StringBody("{ \"username\": \"#{email}\", \"password\": \"#{password}\"}"))
@@ -84,7 +84,7 @@ public class SlimStampenSimulation extends Simulation {
                     );
 
     ScenarioBuilder json = scenario("Json").exec(jwks);
-    ScenarioBuilder loginScenario = scenario("Login").exec(login);
+    ScenarioBuilder loginScenario = scenario("Login").exec(loginAndPractice);
 
     {
         setUp(
