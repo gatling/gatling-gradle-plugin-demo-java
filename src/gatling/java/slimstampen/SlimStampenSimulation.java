@@ -73,6 +73,18 @@ public class SlimStampenSimulation extends Simulation {
                             )
             );
 
+    ChainBuilder loadLibrary = feed(userFeeder)
+            .exec(http("login")
+                    .post("/api/user/login")
+                    .body(StringBody("{ \"username\": \"#{email}\", \"password\": \"#{password}\"}"))
+                    .check(header("Set-Cookie").exists().saveAs("session"))
+            )
+            .pause(1)
+            .exec(addCookie(Cookie("Cookie", "#{session}")))
+            .exec(http("load_lesson")
+                    .get("/api/lesson-group/language-with-favorites/en-GB")
+                    .check(status().is(200)));
+
     HttpProtocolBuilder httpProtocol =
             http.baseUrl(baseUrl)
                     .acceptHeader("application/json,text/plain,*/*")
@@ -85,11 +97,13 @@ public class SlimStampenSimulation extends Simulation {
 
     ScenarioBuilder json = scenario("Json").exec(jwks);
     ScenarioBuilder loginScenario = scenario("Login").exec(loginAndPractice);
+    ScenarioBuilder loadLibraryScenario = scenario("LoadLessons").exec(loadLibrary);
 
     {
         setUp(
                 json.injectOpen(rampUsers(amountOfUsers).during(10)),
-                loginScenario.injectOpen(rampUsers(amountOfUsers).during(30))
+                loginScenario.injectOpen(rampUsers(amountOfUsers).during(30)),
+                loadLibraryScenario.injectOpen(rampUsers(amountOfUsers).during(20))
         ).protocols(httpProtocol);
     }
 }
