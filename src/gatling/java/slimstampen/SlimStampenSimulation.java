@@ -11,6 +11,10 @@ import static io.gatling.javaapi.http.HttpDsl.*;
 
 public class SlimStampenSimulation extends Simulation {
 
+    private final String baseUrl = "https://app-test.slimstampen.nl/ruggedlearning";
+    private final int amountOfResponses = 100;
+    private final int amountOfUsers = 100;
+
     FeederBuilder<String> userFeeder = csv("users.csv").circular();
     FeederBuilder<Object> responseFeeder = jsonFile("responses.json").random();
 
@@ -32,7 +36,7 @@ public class SlimStampenSimulation extends Simulation {
                     .check(jsonPath("$.anonymous").ofBoolean().is(false))
             )
             .pause(2)
-            .repeat(50).on(
+            .repeat(amountOfResponses).on(
                     feed(responseFeeder)
                             .pause(2)
                             .exec(http("response_save")
@@ -70,7 +74,7 @@ public class SlimStampenSimulation extends Simulation {
             );
 
     HttpProtocolBuilder httpProtocol =
-            http.baseUrl("https://app-test.slimstampen.nl/ruggedlearning")
+            http.baseUrl(baseUrl)
                     .acceptHeader("application/json,text/plain,*/*")
                     .acceptLanguageHeader("nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7,de;q=0.6")
                     .acceptEncodingHeader("gzip, deflate, br")
@@ -84,8 +88,8 @@ public class SlimStampenSimulation extends Simulation {
 
     {
         setUp(
-                json.injectOpen(rampUsers(100).during(10)),
-                loginScenario.injectOpen(rampUsers(50).during(10))
+                json.injectOpen(rampUsers(amountOfUsers).during(10)),
+                loginScenario.injectOpen(rampUsers(amountOfUsers).during(30))
         ).protocols(httpProtocol);
     }
 }
