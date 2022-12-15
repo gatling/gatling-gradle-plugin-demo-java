@@ -1,17 +1,13 @@
-Gatling plugin for Gradle - Java demo project
+Gatling load testing tool for SlimStampen
 =============================================
 
-A simple showcase of a Gradle project using the Gatling plugin for Gradle. Refer to the plugin documentation
-[on the Gatling website](https://gatling.io/docs/current/extensions/gradle_plugin/) for usage.
+This repository is a fork of https://github.com/gatling/gatling-gradle-plugin-demo-java
 
-This project is written in Java, others are available for [Kotlin](https://github.com/gatling/gatling-gradle-plugin-demo-kotlin)
-and [Scala](https://github.com/gatling/gatling-gradle-plugin-demo-scala).
+## Setup
+To setup the load testing tool you will need to set the project SDK to Java 16 and run the `build.gradle` file.
 
-It includes:
+## Run
+To run the load tests, you will need to run the `gatling-load-testing-tool [gatlingRun]` configuration. This configuration can be found and added to your project in `.run\gatling-load-testing-tool [gatlingRun].run.xml`.
 
-* Gradle Wrapper, so you don't need to install Gradle (a JDK must be installed and $JAVA_HOME configured)
-* minimal `build.gradle` leveraging Gradle wrapper
-* latest version of `io.gatling.gradle` plugin applied
-* sample [Simulation](https://gatling.io/docs/gatling/reference/current/general/concepts/#simulation) class,
-demonstrating sufficient Gatling functionality
-* proper source file layout
+## Reports
+Reports of the load tests are generated and stored in `/build/reports/gatling`. The command line output of the load tests will also display an url to the report of that run.
