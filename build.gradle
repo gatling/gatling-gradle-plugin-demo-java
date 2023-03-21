@@ -17,3 +17,8 @@ gatling {
 repositories {
   mavenCentral()
 }
+
+task gatlingRecorder(type: JavaExec) {
+  classpath = sourceSets.gatling.runtimeClasspath
+  mainClass = 'Recorder'
+}
