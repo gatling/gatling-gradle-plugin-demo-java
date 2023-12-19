@@ -20,7 +20,7 @@ public class ComputerDatabaseSimulation extends Simulation {
     FeederBuilder<String> feeder = csv("search.csv").random();
 
     ChainBuilder search = exec(
-            http("Home").get("/")),
+            http("Home").get("/"),
             pause(1),
             feed(feeder),
             http("Search")
