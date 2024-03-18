@@ -1,7 +1,6 @@
-import java.net.URISyntaxException;
+import java.io.File;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import static java.util.Objects.requireNonNull;
+import java.util.Arrays;
 
 public class IDEPathHelper {
 
@@ -12,18 +11,20 @@ public class IDEPathHelper {
   static final Path recorderConfigFile;
 
   static {
-    try {
-      Path projectRootDir = Paths.get(requireNonNull(IDEPathHelper.class.getResource("gatling.conf"), "Couldn't locate gatling.conf").toURI()).getParent().getParent().getParent().getParent();
-      Path gradleBuildDirectory = projectRootDir.resolve("build");
+      gradleBinariesDirectory =
+              Arrays.stream(System.getProperty("java.class.path").split(File.pathSeparator))
+                      .map(cpe -> Path.of(cpe))
+                      .filter(cpe -> cpe.endsWith("gatling"))
+                      .findFirst()
+                      .get();
+
+      Path gradleBuildDirectory = gradleBinariesDirectory.getParent().getParent().getParent();
+      Path projectRootDir = gradleBuildDirectory.getParent();
       Path gradleSrcDirectory = projectRootDir.resolve("src").resolve("gatling");
 
       gradleSourcesDirectory = gradleSrcDirectory.resolve("java");
       gradleResourcesDirectory = gradleSrcDirectory.resolve("resources");
-      gradleBinariesDirectory = gradleBuildDirectory.resolve("classes").resolve("java").resolve("gatling");
       resultsDirectory = gradleBuildDirectory.resolve("reports").resolve("gatling");
       recorderConfigFile = gradleResourcesDirectory.resolve("recorder.conf");
-    } catch (URISyntaxException e) {
-      throw new ExceptionInInitializerError(e);
-    }
   }
 }
