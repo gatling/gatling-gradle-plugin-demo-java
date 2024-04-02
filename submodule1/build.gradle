@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+  //  id "org.hibernate.orm" version "6.5.0.CR1"
+//    id 'org.springframework.boot' version '3.2.4'
+}
+
+group = 'org.example'
+version = 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("com.google.guava:guava:33.1.0-jre")
+    implementation(project(":libs"))
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,15 @@
+//pluginManagement {
+//    repositories {
+//        mavenLocal()
+//        gradlePluginPortal()
+//    }
+//}
+//includeBuild("/home/bastien/dev/gatling-gradle-plugin")
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+    }
+}
+include 'submodule1', 'load-testing-submodule', 'libs'
+

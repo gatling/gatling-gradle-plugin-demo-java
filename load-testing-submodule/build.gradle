@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    // The following line allows to load io.gatling.gradle plugin and directly apply it
+    id 'io.gatling.gradle' version '3.10.3.3'//'42.0.0-SNAPSHOT'
+    //version '3.10.5'
+}
+
+dependencies {
+    //implementation group: 'org.moditect', name: 'moditect', version: '1.2.1.Final'
+    implementation project(':libs')
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '0.9.26'
+//    implementation group: 'org.glassfish.external', name: 'apache-commons', version: '3.0-Preview-b47a'
+//    testImplementation project(":libs")
+//    testImplementation group: 'org.glassfish.external', name: 'apache-commons', version: '3.0-Preview-b47a'
+}
+
+gatling {
+    // WARNING: options below only work when logback config file isn't provided
+//  logLevel = 'WARN' // logback root level
+//  logHttp = 'NONE' // set to 'ALL' for all HTTP traffic in TRACE, 'FAILURES' for failed HTTP traffic in DEBUG
+    enterprise {
+        apiToken "616m5JnzrykGuEu0cHVwNNaA21VaYwCIRzCGnlYz-E_DFPZH4AfyDoTAuQxugvctP"
+        url "https://cloud.dev.gatling.io"
+
+        // Enterprise Cloud (https://cloud.gatling.io/) configuration reference: https://gatling.io/docs/gatling/reference/current/extensions/gradle_plugin/#working-with-gatling-enterprise-cloud
+        // Enterprise Self-Hosted configuration reference: https://gatling.io/docs/gatling/reference/current/extensions/gradle_plugin/#working-with-gatling-enterprise-self-hosted
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
