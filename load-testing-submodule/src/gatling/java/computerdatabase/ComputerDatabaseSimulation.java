@@ -5,7 +5,7 @@ import static io.gatling.javaapi.http.HttpDsl.*;
 
 import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
-import org.sample.Main;
+import org.sample.Foo;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -85,7 +85,7 @@ public class ComputerDatabaseSimulation extends Simulation {
     ScenarioBuilder admins = scenario("Admins").exec(search, browse, edit);
 
     {
-        System.out.println(Main.HELLO);
+        System.out.println(Foo.HELLO);
         setUp(
             users.injectOpen(rampUsers(10).during(10)),
             admins.injectOpen(rampUsers(2).during(10))
