@@ -12,7 +12,7 @@ public class BasicSimulation extends Simulation {
 
   // Load VU count from system properties
   // Reference: https://docs.gatling.io/guides/passing-parameters/
-  private static final int vu = Integer.getInteger("vu", 1);
+  private sta tic final int vu = Integer.getInteger("vu", 1);
 
   // Define HTTP configuration
   // Reference: https://docs.gatling.io/reference/script/protocols/http/protocol/
