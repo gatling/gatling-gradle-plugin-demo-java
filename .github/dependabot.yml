@@ -6,7 +6,10 @@
 version: 2
 updates:
   - package-ecosystem: "gradle" # See documentation for possible values
+    commit-message:
+      prefix: "chore"
     directory: "/" # Location of package manifests
     schedule:
+      interval: "weekly"
       day: "monday" # explicit, even tough it's the weekly default
       time: "07:00" # UTC
