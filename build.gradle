@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     // The following line allows to load io.gatling.gradle plugin and directly apply it
-    id 'io.gatling.gradle' version '3.14.9.8'
+    id 'io.gatling.gradle' version '3.15.0'
 }
 
 gatling {
